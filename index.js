@@ -1,11 +1,15 @@
 const express = require('express');
 const routerApi = require('./routes')
-
 const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/error.handler')
+
+require('dotenv').config()
+
 const app = express();
-const port = 3000;
+
 
 app.use(express.json());
+
+
 
 app.get('/', (req, res) => {
   res.send('Hola mi server en express')
@@ -23,6 +27,6 @@ app.use(logErrors);
 app.use(boomErrorHandler);
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log('Mi port ' + port)
+app.listen(process.env.PORT, () => {
+  console.log('Mi port ' + process.env.PORT)
 })
